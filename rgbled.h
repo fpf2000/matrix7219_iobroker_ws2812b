@@ -16,16 +16,17 @@ int r = 5;
 int g = 5;
 int b = 5;
 
+//Statische Anzeige LED Kreis
 void ledanz(){
 
-  leds[0].setRGB( 0, 255, 0);
-  leds[1].setRGB( 0, 255, 0);
-  leds[2].setRGB( 0, 0, 255);
-  leds[3].setRGB( 0, 0, 255);
-  leds[4].setRGB( 255, 255, 0);
-  leds[5].setRGB( 255, 255, 0);
-  leds[6].setRGB( 255, 0, 0);
-  leds[7].setRGB( 255, 0, 0);
+  leds[0].setRGB( 0, 255, 0); // Gruen
+  leds[1].setRGB( 0, 255, 0); // Gruen
+  leds[2].setRGB( 0, 0, 255); // Blau
+  leds[3].setRGB( 0, 0, 255); // Blau
+  leds[4].setRGB( 255, 255, 0); //Gelb
+  leds[5].setRGB( 255, 255, 0); //Gelb
+  leds[6].setRGB( 255, 0, 0); // Rot
+  leds[7].setRGB( 255, 0, 0); // Rot
 
   
   FastLED.show();

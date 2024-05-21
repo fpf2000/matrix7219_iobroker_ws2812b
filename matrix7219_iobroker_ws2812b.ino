@@ -115,6 +115,10 @@ void setup() {
 
 void loop() {
    
+  // Test LED Kreis mit 4 Farben (bei Bedarf)
+  //ledanz();
+
+  // Anzeige der UHRZEIT
   matrix.fillScreen(LOW);
   time_t now = time(nullptr);
   String time = String(ctime(&now));
@@ -134,14 +138,12 @@ void loop() {
   if (!client.connected()) {
     Serial.println("Keine Verbindung zum MQTT Server");
     connect_to_MQTT();
-
-  //ledanz();
-  //delay(2000);
   
   }
   client.loop();
 }
 
+// Uebernahme und Anzeige der Nachricht auf der DOTMATRIX
 void display_message(String message){
    for ( int i = 0 ; i < width * message.length() + matrix.width() - spacer; i++ ) {
     //matrix.fillScreen(LOW);
@@ -192,6 +194,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   display_message(Text);
   display_message(Text);
   }
+  // Uebernahme des Wert 100 zur Anzeige Gruen vom Script IOBroker LED 0-8
   if (strcmp(topic,"display1/led")==0){
    if(msgString == "100"){
    Serial.print("Changing LED to Green\n");
@@ -201,6 +204,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
    ledgreen();
    delay(2000);
   }
+  // Uebernahme des Wert 75 zur Anzeige Gruen vom Script IOBroker LED 0-6
   if (strcmp(topic,"display1/led")==0){
    if(msgString == "75"){
    Serial.print("Changing LED to Green\n");
@@ -210,6 +214,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
    ledgreenx();
    delay(2000);
   }
+  // Uebernahme des Wert 50 zur Anzeige GELB vom Script IOBroker LED 0-5
   if (strcmp(topic,"display1/led")==0){
    if(msgString == "50"){
    Serial.print("Changing LED to Yellow\n");
@@ -219,6 +224,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
    ledyellow();
    delay(2000);
   }
+  // Uebernahme des Wert 25 zur Anzeige GELB vom Script IOBroker LED 0-3
   if (strcmp(topic,"display1/led")==0){
    if(msgString == "25"){
    Serial.print("Changing LED to Yellow\n");
@@ -228,6 +234,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
    ledyellowx();
    delay(2000);
   }
+  // Uebernahme des Wert 10 zur Anzeige GELB vom Script IOBroker LED 0-1
   if (strcmp(topic,"display1/led")==0){
    if(msgString == "10"){
    Serial.print("Changing LED to RED\n");
