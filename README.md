@@ -1,3 +1,5 @@
+![Die Anzeige](./image/esp8266_max72xx_.png?raw=true "Title")
+
 Eine Compackte Anzeige von ein Paar werten der Photovoltaik Anlage.
 Die Informationen werden über MQTT abgefragt und dieverse Informationen auch per MQTT zurückgegeben.
 Eine 8 LED Ring (WB2812) zeigt in bestimmten Abständen den Ladezustand (SOC) der PV-Batterie an.
