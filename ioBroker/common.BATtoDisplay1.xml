@@ -1,0 +1,424 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="on" id="g*Smb_d(+e8;R5kwWWiP" x="-187" y="-1187">
+    <field name="OID">e3dc-rscp.0.EMS.POWER_PV</field>
+    <field name="CONDITION">any</field>
+    <field name="ACK_CONDITION"></field>
+    <statement name="STATEMENT">
+      <block type="mqtt_sendmessage" id="MT54pyvJ,r8~n,~sVz-o">
+        <field name="INSTANCE">.0</field>
+        <field name="RETAIN">FALSE</field>
+        <value name="TOPIC">
+          <shadow type="text" id="dzXJ(?!b^)P:jc+uz65(">
+            <field name="TEXT">display1/text</field>
+          </shadow>
+        </value>
+        <value name="MESSAGE">
+          <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+            <field name="TEXT">PV ist aktiv</field>
+          </shadow>
+          <block type="text_join" id=":1XHn4oNB+%cI`w~(r@9">
+            <mutation items="2"></mutation>
+            <value name="ADD0">
+              <block type="get_value" id="A;YMjt1)J~kPd]4!VpP_">
+                <field name="ATTR">val</field>
+                <field name="OID">e3dc-rscp.0.EMS.POWER_PV</field>
+              </block>
+            </value>
+            <value name="ADD1">
+              <block type="text" id="v9GBhvZCiWlCW;Q+qKjA">
+                <field name="TEXT"> Watt_Sonne</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <next>
+      <block type="on" id="SI=T/!=_V1T-QbQMnQ%@">
+        <field name="OID">e3dc-rscp.0.EMS.POWER_HOME</field>
+        <field name="CONDITION">ne</field>
+        <field name="ACK_CONDITION"></field>
+        <statement name="STATEMENT">
+          <block type="mqtt_sendmessage" id="^7SmRdK:y3;9aQ-8H}d8">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="Mki~h5KPkB/z11dnXHj+">
+                <field name="TEXT">display1/text</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text_join" id="U:,s4#0ig/h${Nm(i]YJ">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="get_value" id="je(=w4vs9E7!vTG3?nT[">
+                    <field name="ATTR">val</field>
+                    <field name="OID">e3dc-rscp.0.EMS.POWER_HOME</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id="U5waWg)wehI^Ys=OVkTO">
+                    <field name="TEXT"> Watt_Haus</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="on" id="]Hns.!YkepL%t%Mwi|ns" x="-335" y="-659">
+    <field name="OID">e3dc-rscp.0.EMS.BAT_SOC</field>
+    <field name="CONDITION">any</field>
+    <field name="ACK_CONDITION"></field>
+    <statement name="STATEMENT">
+      <block type="controls_if" id="i~0k;|Ss^8@;_~?*T@SX">
+        <mutation elseif="4"></mutation>
+        <value name="IF0">
+          <block type="logic_operation" id="Y(F`q|zhYoSyz8JeT}#M">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="U:3F]rkC;mHCbW_cQIz|">
+                <field name="OP">LTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="PA}Ko1sb!/dtiMX|AKj|">
+                    <value name="VALUE">
+                      <block type="on_source" id="PnJ`=_T:bJvd,Bub_!z7">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="|_=ND$RjJ*]U3yZM9V]p">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="%Aj`REhhizq,ey;)uT2f">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="NAkNWZkvKE?2fwpE~[*I">
+                    <value name="VALUE">
+                      <block type="on_source" id="LR,a;CdpCbg!}cQ.-#%d">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="|P,devuKSw0{S(1vmQ/b">
+                    <field name="NUM">76</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="mqtt_sendmessage" id="YOV%J!9ey^%U{9,3xW/{">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="@@kF#gRnL~hb}z#g@J)?">
+                <field name="TEXT">display1/led</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text" id="0C1Ysj#;~J_P`~%q;Fjo">
+                <field name="TEXT">100</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_operation" id="Jg=oqc*g.r:@wC%k~L9@">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="De?djcy952hJiMn_CE^x">
+                <field name="OP">LTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="y~S*e~YyLWV#(a{ig4j=">
+                    <value name="VALUE">
+                      <block type="on_source" id="^QRVhFIT7F=RYvJ;wo/q">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="U6QDpE~PrX+]UvMY#v-d">
+                    <field name="NUM">75</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="D8vdS4W`Y5W,c5o]IdY$">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="D^oT|I0n19PFN^qCNVZ^">
+                    <value name="VALUE">
+                      <block type="on_source" id="#5xTT2tZ(P)-[~xz;Z]c">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="jAtR.Svb#YP.RDmaLyLP">
+                    <field name="NUM">51</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="mqtt_sendmessage" id="9Dqd=cE)wH$Oc9$uhX?A">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="VSn!,Zrw%Wc6o0,N9`1n">
+                <field name="TEXT">display1/led</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text" id="/|M2lQYJ`|K0pP8jHdl6">
+                <field name="TEXT">75</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF2">
+          <block type="logic_operation" id="Yix*rmp8,[+gY;Z,FDSb">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="Ia}HePjyyE#ST]i)V#h6">
+                <field name="OP">LTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="SV}vabMki.8~Cs0TzL?1">
+                    <value name="VALUE">
+                      <block type="on_source" id="Ty#K4z87=Ze`m%b0zG=!">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="Wkv]Nn%3=Y+Mra!/rv56">
+                    <field name="NUM">50</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="GP)^7X2x7l_r(VIh63gX">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="i5dek#[!Q/+Qq%%flW,k">
+                    <value name="VALUE">
+                      <block type="on_source" id="}r{1^6rJ1TTAwjv=:Whc">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="-FZU2P|sG]]LjWmU$_Y#">
+                    <field name="NUM">26</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO2">
+          <block type="mqtt_sendmessage" id="B8j*K;i^RW|0O+EI@r/H">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="G0|_`Pr$m:1Hw.x|7ns*">
+                <field name="TEXT">display1/led</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text" id="/|-=U=eN,sQnPB(L{Y`h">
+                <field name="TEXT">50</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF3">
+          <block type="logic_operation" id="M!Q}Ib:+{)W]*VatC:J`">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="|fpz[EdWF6N9g_vwHCBQ">
+                <field name="OP">LTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="QXOXcmmapyKmb.Rk`)0p">
+                    <value name="VALUE">
+                      <block type="on_source" id="EzX,x.6Byi2f[4[,Nn6J">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="@t3DZ;Z/_bi?ZyTu0.k]">
+                    <field name="NUM">25</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="c9UkkazkG4kBz6a5QE9t">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="UabSFhk6xD1O*E+sN}T)">
+                    <value name="VALUE">
+                      <block type="on_source" id="q11D=poViHunbl-d]w1*">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="~0NDIi.`1OX1+p~almml">
+                    <field name="NUM">11</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO3">
+          <block type="mqtt_sendmessage" id="=5I;FoPY6x:2$n!iKS3=">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="l_dj;17QO$Z#c16V]~cV">
+                <field name="TEXT">display1/led</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text" id="{HjX@n?+GgCU%t#h}XvD">
+                <field name="TEXT">25</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <value name="IF4">
+          <block type="logic_operation" id="{M.6+RGwhSF2485,PNr}">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="Y$YM~`q!D(u8DF*om]~w">
+                <field name="OP">LTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="thI.2r^[/.8b{JAge,kN">
+                    <value name="VALUE">
+                      <block type="on_source" id="aRVt~Z6*ThI2NWM}J=1o">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="Sr?t%p0!txgZUFbf%;?8">
+                    <field name="NUM">10</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="Ie6(?o,Mv^^RObY8#eXA">
+                <field name="OP">GTE</field>
+                <value name="A">
+                  <block type="convert_tonumber" id="?8+DbnI?uqHp/Njy-?sF">
+                    <value name="VALUE">
+                      <block type="on_source" id="IZaJ%$#TRd6dUV$3,JkE">
+                        <field name="ATTR">state.val</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="^7!!3NIT4~bBgG:C#cLK">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO4">
+          <block type="mqtt_sendmessage" id=":4tM1L;d}!U*864I$?jG">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="TDXJpIoVQT{F!dW]w/*F">
+                <field name="TEXT">display1/led</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text" id="+/*.6stZB*`pt6eHwyU1">
+                <field name="TEXT">10</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="mqtt_sendmessage" id="Pmzix:E(*~HmgMe)G0/n">
+            <field name="INSTANCE">.0</field>
+            <field name="RETAIN">FALSE</field>
+            <value name="TOPIC">
+              <shadow type="text" id="6zDrOH#b9BH29ODrY@o;">
+                <field name="TEXT">display1/text</field>
+              </shadow>
+            </value>
+            <value name="MESSAGE">
+              <shadow type="text" id="Pf@$rz4QraP*Jmi@Mf/`">
+                <field name="TEXT">PV ist aktiv</field>
+              </shadow>
+              <block type="text_join" id="eMP$^:3-k@z`AbuQd2rs">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="get_value" id="Bs=zx7qL9e?{lZ`?T-fS">
+                    <field name="ATTR">val</field>
+                    <field name="OID">e3dc-rscp.0.EMS.BAT_SOC</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="text" id="XtSssE_QV74j7c)EkM@n">
+                    <field name="TEXT"> %</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
