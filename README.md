@@ -1,7 +1,7 @@
 ![Die Anzeige](./image/esp8266_max72xx_.png?raw=true "Title")
 
-Eine Compackte Anzeige von ein Paar werten der Photovoltaik Anlage.
-Die Informationen werden über MQTT abgefragt und dieverse Informationen auch per MQTT zurückgegeben.
+Eine Compact Anzeige von ein Paar werten der Photovoltaik Anlage.
+Die Informationen werden über MQTT abgefragt und diverse Informationen auch per MQTT zurückgegeben.
 Eine 8 LED Ring (WB2812) zeigt in bestimmten Abständen den Ladezustand (SOC) der PV-Batterie an.
 Das ganze wird von einem IOBroker Script per MQTT bereitgestellt
 Zu verbessern wäre hier:
