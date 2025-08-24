@@ -1,4 +1,4 @@
-![Die Anzeige](./image/esp8266_max72xx_.png?raw=true "Title")
+![Die Anzeige](./image/esp8266_max72xx_.png?raw=true "Anschalt schema")
 
 Eine Compact Anzeige von ein Paar werten der Photovoltaik Anlage.
 Die Informationen werden über MQTT abgefragt und diverse Informationen auch per MQTT zurückgegeben.
